@@ -8,19 +8,19 @@ else
 	TAG=release
 endif
 
-all:openssl srtp mp4v2 mediaserver
+all:ssl srtp mp4 mediaserver
 	echo $(ROOT_DIR)
 
-openssl:
-	cd ${ROOT_DIR}/openssl &&  export KERNEL_BITS=64 && ./config && make && make install 
+ssl:
+	cd ${ROOT_DIR}/openssl &&  export KERNEL_BITS=64 && ./config  && make && sudo make install 
 	cd $(ROOT_DIR)
 
 srtp:
-	cd ${ROOT_DIR}/libsrtp && ./configure && make && make install 
+	cd ${ROOT_DIR}/libsrtp && ./configure && make && sudo make install 
 	cd $(ROOT_DIR) 
 
-mp4v2:
-	cd cd ${ROOT_DIR}/mp4v2 && autoreconf -i && ./configure && make && make install
+mp4:
+	cd ${ROOT_DIR}/mp4v2 && autoreconf -i && ./configure && make && sudo make install
 	cd $(ROOT_DIR)
 
 mediaserver:
