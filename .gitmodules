@@ -1,0 +1,12 @@
+[submodule "media-server"]
+	path = media-server
+	url = https://github.com/notedit/media-server.git
+[submodule "mp4v2"]
+	path = mp4v2
+	url = https://github.com/medooze/mp4v2.git
+[submodule "libsrtp"]
+	path = libsrtp
+	url = https://github.com/cisco/libsrtp.git
+[submodule "openssl"]
+	path = openssl
+	url = https://github.com/openssl/openssl.git
