@@ -8,6 +8,8 @@ else
 	TAG=release
 endif
 
+TARGET_LIB = $(ROOT_DIR)/media-server/bin/$(TAG)/libmediaserver.a
+
 all:ssl srtp mp4 mediaserver
 	echo $(ROOT_DIR)
 
@@ -24,7 +26,7 @@ mp4:
 	cd $(ROOT_DIR)
 
 mediaserver:
-	cp config.mk  ./media-server/ && make -C media-server libmediaserver.a 
+	cp config.mk  ./media-server/ && make -C media-server libmediaserver.a  &&  sudo cp $(TARGET_LIB)  /usr/local/lib/libmediaserver.a 
 	echo ${ROOT_DIR}
 
 echo:
