@@ -14,15 +14,15 @@ all:ssl srtp mp4 mediaserver
 	echo $(ROOT_DIR)
 
 ssl:
-	cd ${ROOT_DIR}/openssl &&  export KERNEL_BITS=64 && ./config  && make && sudo make install 
+	cd ${ROOT_DIR}/openssl &&  export KERNEL_BITS=64 && ./config --prefix=/usr/local/ --openssldir=/usr/local/ && make && sudo make install 
 	cd $(ROOT_DIR)
 
 srtp:
-	cd ${ROOT_DIR}/libsrtp && ./configure && make && sudo make install 
+	cd ${ROOT_DIR}/libsrtp && ./configure --prefix=/usr/local/ --enable-openssl  --with-openssl-dir=/usr/local/  && make && sudo make install 
 	cd $(ROOT_DIR) 
 
 mp4:
-	cd ${ROOT_DIR}/mp4v2 && autoreconf -i && ./configure && make && sudo make install
+	cd ${ROOT_DIR}/mp4v2 && autoreconf -i && ./configure --prefix=/usr/local/ && make && sudo make install
 	cd $(ROOT_DIR)
 
 mediaserver:
