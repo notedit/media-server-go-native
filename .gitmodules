@@ -7,6 +7,3 @@
 [submodule "libsrtp"]
 	path = libsrtp
 	url = https://github.com/cisco/libsrtp.git
-[submodule "openssl"]
-	path = openssl
-	url = https://github.com/openssl/openssl.git
