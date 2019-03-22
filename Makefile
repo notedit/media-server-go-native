@@ -13,6 +13,13 @@ TARGET_LIB = $(ROOT_DIR)/media-server/bin/$(TAG)/libmediaserver.a
 all:ssl srtp mp4 mediaserver
 	echo $(ROOT_DIR)
 
+
+clean:
+	cd ${ROOT_DIR}/openssl && make clean
+	cd ${ROOT_DIR}/libsrtp && make clean
+	cd ${ROOT_DIR}/mp4v2 && make clean
+	cd ${ROOT_DIR}/media-server && rm -rf build  && rm -rf bin
+
 ssl:
 	cd ${ROOT_DIR}/openssl &&  export KERNEL_BITS=64 && ./config --prefix=/usr/local/ --openssldir=/usr/local/ && make && sudo make install 
 	cd $(ROOT_DIR)
