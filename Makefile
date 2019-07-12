@@ -36,5 +36,12 @@ mediaserver:
 	cp config.mk  ./media-server/ && make -C media-server libmediaserver.a  &&  sudo cp $(TARGET_LIB)  /usr/local/lib/libmediaserver.a 
 	echo ${ROOT_DIR}
 
+install:
+	cd ./openssl/ && make install 
+	cd ./libsrtp/ && make install 
+	cd ./mp4v2/ && make install 
+	cp ./media-server/bin/release/libmediaserver.a /usr/local/lib/
+
 echo:
 	echo $(ROOT_DIR)
+
