@@ -15,25 +15,25 @@ all:ssl srtp mp4 mediaserver
 
 
 clean:
-	cd ${ROOT_DIR}/openssl && make clean
-	cd ${ROOT_DIR}/libsrtp && make clean
-	cd ${ROOT_DIR}/mp4v2 && make clean
-	cd ${ROOT_DIR}/media-server && rm -rf build  && rm -rf bin
+	cd ./openssl && make clean
+	cd ./libsrtp && make clean
+	cd ./mp4v2 && make clean
+	cd ./media-server && rm -rf build  && rm -rf bin && rm /usr/local/lib/libmediaserver.a
 
 ssl:
-	cd ${ROOT_DIR}/openssl &&  export KERNEL_BITS=64 && ./config --prefix=/usr/local/ --openssldir=/usr/local/ && make && sudo make install 
+	cd ${ROOT_DIR}/openssl &&  export KERNEL_BITS=64 && ./config --prefix=/usr/local/ --openssldir=/usr/local/ && make 
 	cd $(ROOT_DIR)
 
 srtp:
-	cd ${ROOT_DIR}/libsrtp && ./configure --prefix=/usr/local/ --enable-openssl  --with-openssl-dir=/usr/local/  && make && sudo make install 
+	cd ${ROOT_DIR}/libsrtp && ./configure --prefix=/usr/local/ --enable-openssl  --with-openssl-dir=/usr/local/  && make 
 	cd $(ROOT_DIR) 
 
 mp4:
-	cd ${ROOT_DIR}/mp4v2 && autoreconf -i && ./configure --prefix=/usr/local/ && make && sudo make install
+	cd ${ROOT_DIR}/mp4v2 && autoreconf -i && ./configure --prefix=/usr/local/ && make 
 	cd $(ROOT_DIR)
 
 mediaserver:
-	cp config.mk  ./media-server/ && make -C media-server libmediaserver.a  &&  sudo cp $(TARGET_LIB)  /usr/local/lib/libmediaserver.a 
+	cp config.mk  ./media-server/ && make -C media-server libmediaserver.a 
 	echo ${ROOT_DIR}
 
 install:

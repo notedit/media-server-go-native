@@ -47,4 +47,6 @@ git clone --recurse-submodules https://github.com/notedit/media-server-go-native
 cd media-server-go-native
 
 make
+
+sudo make install 
 ```
