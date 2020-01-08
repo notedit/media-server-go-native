@@ -6,7 +6,7 @@ sudo: true
 matrix:
   include:
     - os: linux
-      dist: trusty
+      dist: bionic
     - os: osx
       osx_image: xcode10.1
 
