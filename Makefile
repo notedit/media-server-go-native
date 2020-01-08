@@ -1,5 +1,6 @@
 export ROOT_DIR=${PWD}
 
+
 include config.mk
 
 ifeq ($(DEBUG),yes)
@@ -19,26 +20,27 @@ clean:
 	cd ./openssl && make clean
 	cd ./libsrtp && make clean
 	cd ./mp4v2 && make clean
-	cd ./media-server && rm -rf build  && rm -rf bin && rm /var/opt/lib/libmediaserver.a
+	cd ./media-server && rm -rf build  && rm -rf bin && rm $(PREFIX)lib/libmediaserver.a
 
 ssl:
-	cd ./openssl &&  export KERNEL_BITS=64 && ./config --prefix=/var/opt/ --openssldir=/var/opt/ && make && sudo make install 
+	cd ./openssl &&  export KERNEL_BITS=64 && ./config --prefix=$(PREFIX) --openssldir=$(PREFIX) && make && sudo make install 
 
 srtp:
-	cd ./libsrtp && ./configure --prefix=/var/opt/ --enable-openssl  --with-openssl-dir=/var/opt/  && make && sudo make install  
+	cd ./libsrtp && ./configure --prefix=$(PREFIX) --enable-openssl  --with-openssl-dir=$(PREFIX)  && make && sudo make install  
 
 mp4:
-	cd ./mp4v2 && autoreconf -i && ./configure --prefix=/var/opt/ && make && sudo make install 
+	cd ./mp4v2 && autoreconf -i && ./configure --prefix=$(PREFIX) && make && sudo make install 
 
 mediaserver:
-	cp config.mk  ./media-server/ && make -C media-server libmediaserver.a &&  sudo cp ./media-server/bin/release/libmediaserver.a /var/opt/lib/
+	cp media-Makefile  ./media-server/Makefile
+	cp config.mk  ./media-server/ && make -C media-server libmediaserver.a &&  sudo cp ./media-server/bin/release/libmediaserver.a  $(PREFIX)lib/
 
 
 install:
 	cd ./openssl/ && make install 
 	cd ./libsrtp/ && make install 
 	cd ./mp4v2/ && make install 
-	cp ./media-server/bin/release/libmediaserver.a /var/opt/lib
+	cp ./media-server/bin/release/libmediaserver.a $(PREFIX)lib
 
 echo:
 	echo $(ROOT_DIR)
